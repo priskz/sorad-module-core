@@ -1,0 +1,1 @@
+<div id="footer-common" class="container-fluid"></div>
