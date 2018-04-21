@@ -28,7 +28,7 @@ class Action extends AbstractAction
 		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
 
 		// Verify that the data has been sanitized and validated.
-		if ($actionDataPayload->getStatus() != 'valid')
+		if($actionDataPayload->getStatus() != 'valid')
 		{
 			return $actionDataPayload;
 		}
