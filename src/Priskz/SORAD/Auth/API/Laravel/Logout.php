@@ -1,6 +1,6 @@
 <?php namespace Priskz\SORAD\Auth\API\Laravel;
 
-use Alert, Redirect;
+use Redirect;
 use Priskz\SORAD\Auth\API\Laravel\Logout\Action;
 use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
 
@@ -19,9 +19,9 @@ class Logout extends Responder
 	 */
 	public function generateResponse($payload)
 	{
-		if ($payload->getStatus() != 'logged_out')
+		if($payload->getStatus() != 'logged_out')
 		{
-			Alert::danger('Logout failed. Please try again.');
+			dd('Logout failed. Please try again.');
 
 			return Redirect::back();
 		}

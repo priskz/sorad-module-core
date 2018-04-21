@@ -1,6 +1,6 @@
 <?php namespace Priskz\SORAD\Auth\API\Laravel;
 
-use Alert, Redirect;
+use Redirect;
 use Priskz\SORAD\Auth\API\Laravel\Login\Action;
 use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
 
@@ -19,9 +19,9 @@ class Login extends Responder
 	 */
 	public function generateResponse($payload)
 	{
-		if ($payload->getStatus() != 'logged_in')
+		if($payload->getStatus() != 'logged_in')
 		{
-			Alert::danger('Login failed. Please try again.');
+			dd('Login failed. Please try again.');
 			
 			return Redirect::back();
 		}

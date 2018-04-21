@@ -1,6 +1,6 @@
 <?php namespace Priskz\SORAD\Auth\API\Laravel;
 
-use Alert, Auth, Redirect;
+use Auth, Redirect;
 use Priskz\SORAD\Auth\API\Laravel\Register\Action;
 use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
 
@@ -24,18 +24,18 @@ class Register extends Responder
 			switch($payload->getStatus())
 			{
 				case 'unique_email':
-					Alert::danger('Email already exists.');
+					dd('Email already exists.');
 				break;
 
 				case 'unique_username':
-					Alert::danger('Username already exists.');
+					dd('Username already exists.');
 				break;
 
 				default:
 					// Set error messages.
 					foreach($payload->getData()->all() as $message)
 					{
-						Alert::danger($message);
+						dd($message);
 					}
 				break;
 			}
@@ -47,7 +47,7 @@ class Register extends Responder
 		Auth::loginUsingId($payload->getData()->getKey());
 
 		// Set sucess message.
-		Alert::success('Thanks for registering!');
+		dd('Thanks for registering!');
 
 		return Redirect::route('front.home');
 	}

@@ -1,6 +1,6 @@
 <?php namespace Priskz\SORAD\Auth\API\Laravel;
 
-use Alert, Redirect;
+use Redirect;
 use Priskz\SORAD\Auth\API\Laravel\ForgotPassword\Action;
 use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
 
@@ -19,15 +19,15 @@ class ForgotPassword extends Responder
 	 */
 	public function generateResponse($payload)
 	{
-		if ($payload->getStatus() != 'passwords.sent')
+		if($payload->getStatus() != 'passwords.sent')
 		{
-			 Alert::danger('Invalid email, please try again!');
+			 dd('Invalid email, please try again!');
 
 			return Redirect::back()
 				->withInput();
 		}
 
-        Alert::success('An email containing a link to reset your password has been sent!');
+		dd('An email containing a link to reset your password has been sent!');
 
         return Redirect::route('auth.password.forgot');
 	}

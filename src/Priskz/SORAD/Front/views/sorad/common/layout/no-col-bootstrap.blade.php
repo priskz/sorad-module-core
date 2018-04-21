@@ -22,12 +22,6 @@
 <script src="{{ asset('dist/misc/ajaxer.js') }}"></script>
 
 <script>
-	// Display notifications.
-	@foreach(Alert::getBag()->getMessages() as $type => $messages)
-		@foreach($messages as $message)
-			// @todo: Add aliases that map to main notifier messaging types.
-			Notifier.{{ ($type == 'danger' ? 'error' : $type) }}('{{ $message }}');
-		@endforeach
-	@endforeach
+	// @todo: Display notifications.
 </script>
 @stop
