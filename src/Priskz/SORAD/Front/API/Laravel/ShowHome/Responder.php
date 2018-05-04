@@ -1,11 +1,11 @@
 <?php
 
-namespace Priskz\SORAD\Front\API\Laravel;
+namespace Priskz\SORAD\Front\API\Laravel\ShowHome;
 
 use Config, View;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class ShowHome extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  string

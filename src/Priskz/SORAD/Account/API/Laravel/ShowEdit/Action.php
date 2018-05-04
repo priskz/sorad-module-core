@@ -28,10 +28,7 @@ class Action extends LaravelAction
 			return $payload;
 		}
 
-		// Set the execute data.
-		$executeData = $payload->getData()['user_id'];
-
 		// Execute the action.
-		return User::get([['field' => 'id', 'value' => $data, 'operator' => '=', 'or' => false]]);
+		return User::get([['field' => 'id', 'value' => $payload->getData()['user_id'], 'operator' => '=', 'or' => false]]);
 	}
 }

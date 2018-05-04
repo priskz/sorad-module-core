@@ -1,12 +1,11 @@
 <?php
 
-namespace Priskz\SORAD\Auth\API\Laravel;
+namespace Priskz\SORAD\Auth\API\Laravel\ResetPassword;
 
 use Password;
-use Priskz\SORAD\Auth\API\Laravel\ResetPassword\Action;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class ResetPassword extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  array
@@ -14,7 +13,7 @@ class ResetPassword extends Responder
 	protected $status = [
 		Password::PASSWORD_RESET   => self::HTTP_OK,
 		Password::INVALID_PASSWORD => self::HTTP_BAD_REQUEST,
-		Password::INVALID_TOKEN    => seLf::HTTP_BAD_REQUEST,
+		Password::INVALID_TOKEN    => self::HTTP_BAD_REQUEST,
 		Password::INVALID_USER     => self::HTTP_BAD_REQUEST
 	];
 

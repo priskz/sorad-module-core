@@ -1,11 +1,10 @@
 <?php
 
-namespace Priskz\SORAD\Auth\API\Laravel;
+namespace Priskz\SORAD\Auth\API\Laravel\Login;
 
-use Priskz\SORAD\Auth\API\Laravel\Login\Action;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class Login extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  array

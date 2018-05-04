@@ -40,10 +40,7 @@ class Action extends LaravelAction
 			return $payload;
 		}
 
-		// Set the execute data.
-		$executeData = $payload->getData();
-
-		$status = Password::reset($data, function($user, $password)
+		$status = Password::reset($payload->getData(), function($user, $password)
 		{
 			$user->password = Hash::make($password);
 			$user->save();

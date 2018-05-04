@@ -1,11 +1,11 @@
 <?php
 
-namespace Priskz\SORAD\Admin\API\Laravel;
+namespace Priskz\SORAD\Admin\API\Laravel\ShowOverview;
 
 use Config, View;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class ShowOverview extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  string

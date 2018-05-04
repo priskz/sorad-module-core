@@ -32,7 +32,7 @@ class Routes extends AbstractRoutes
 		Route::group(['prefix' => static::$prefix, 'middleware' => static::$middleware, 'namespace' => static::$namespace], function()
 		{
 			// View Admin Overview.
-			Route::get('/', 'ShowOverview')->name('admin.overview');
+			Route::get('/', 'ShowOverview\Responder')->name('admin.overview');
 		});
 	}
 }

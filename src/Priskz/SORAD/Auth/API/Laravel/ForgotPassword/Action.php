@@ -35,18 +35,15 @@ class Action extends LaravelAction
 	public function execute($data)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($data, $this->config);
+		$payload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($actionDataPayload->getStatus() != 'valid')
+		if($payload->getStatus() != 'valid')
 		{
-			return $actionDataPayload;
+			return $payload;
 		}
-
-		// Set the execute data.
-		$executeData = $actionDataPayload->getData();
-
-		$response = $this->passwords->sendResetLink($data, function($email)
+		
+		$response = $this->passwords->sendResetLink($payload->getData(), function($email)
 		{
 			$email->subject('Password Reset');
 		});

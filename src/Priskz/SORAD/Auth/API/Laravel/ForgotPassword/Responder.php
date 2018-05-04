@@ -1,11 +1,10 @@
 <?php
 
-namespace Priskz\SORAD\Auth\API\Laravel;
+namespace Priskz\SORAD\Auth\API\Laravel\ForgotPassword;
 
-use Priskz\SORAD\Auth\API\Laravel\ForgotPassword\Action;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class ForgotPassword extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  array

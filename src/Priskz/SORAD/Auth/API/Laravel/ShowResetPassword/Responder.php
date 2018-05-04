@@ -1,11 +1,11 @@
 <?php
 
-namespace Priskz\SORAD\Auth\API\Laravel;
+namespace Priskz\SORAD\Auth\API\Laravel\ShowResetPassword;
 
 use Config, View;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class ShowResetPassword extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  string

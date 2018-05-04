@@ -1,11 +1,10 @@
 <?php
 
-namespace Priskz\SORAD\Auth\API\Laravel;
+namespace Priskz\SORAD\Auth\API\Laravel\Logout;
 
-use Priskz\SORAD\Auth\API\Laravel\Logout\Action;
-use Priskz\SORAD\Responder\LaravelResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder;
 
-class Logout extends Responder
+class Responder extends LaravelResponder
 {
 	/**
 	 *	@var  array

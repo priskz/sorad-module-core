@@ -3,7 +3,6 @@
 namespace Priskz\SORAD\Account\API\Laravel\Update;
 
 use User;
-use Priskz\SORAD\Account\API\Laravel\Update\Processor;
 use Priskz\SORAD\Action\LaravelAction;
 
 class Action extends LaravelAction
@@ -35,30 +34,24 @@ class Action extends LaravelAction
 	public function execute($data)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($data, $this->config);
+		$payload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($actionDataPayload->getStatus() != 'valid')
+		if($payload->getStatus() != 'valid')
 		{
-			return $actionDataPayload;
+			return $payload;
 		}
 
 		// @todo: Refactor this logic out of this class.
 
 		// Get and ensure the model exists.
-		$userPayload = User::get([['field' => 'id', 'value' => $actionDataPayload->getData()['user_id'], 'operator' => '=', 'or' => false]]);
+		$userPayload = User::get([['field' => 'id', 'value' => $payload->getData()['user_id'], 'operator' => '=', 'or' => false]]);
 
 		if($userPayload->getStatus() != 'found')
 		{
 			return $userPayload;
 		}
 
-		// Set the execute data.
-		$executeData          = [];
-		$executeData['model'] = $userPayload->getData()->first();
-		$executeData['input'] = $actionDataPayload->getData();
-
-		// Execute the action.
-		return User::update($executeData['input'], $executeData['model']);
+		return User::update($payload->getData(), $userPayload->getData()->first());
 	}
 }

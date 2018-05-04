@@ -10,7 +10,7 @@ class Routes extends AbstractRoutes
     /**
      * @property string $prefix
      */
-	protected static $prefix     = '/';
+	protected static $prefix = '/';
 
     /**
      * @property array $middleware
@@ -20,7 +20,7 @@ class Routes extends AbstractRoutes
     /**
      * @property array $nameSpace
      */
-	protected static $namespace  = __NAMESPACE__;
+	protected static $namespace = __NAMESPACE__;
 
     /**
      * Register the route group.
@@ -32,7 +32,7 @@ class Routes extends AbstractRoutes
 		Route::group(['prefix' => static::$prefix, 'middleware' => static::$middleware, 'namespace' => static::$namespace], function()
 		{
 			// Show Home
-			Route::get('/', 'ShowHome')->name('front.home');
+			Route::get('/', 'ShowHome\Responder')->name('front.home');
 		});
 	}
 }

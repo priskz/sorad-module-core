@@ -17,7 +17,7 @@ class Action extends LaravelAction
 	/**
 	 *	Main Method
 	 */
-	public function __invoke($requestData)
+	public function execute($requestData)
 	{
 		// Process Domain Data Keys
 		$payload = $this->processor->process($requestData, $this->config);
@@ -28,15 +28,6 @@ class Action extends LaravelAction
 			return $payload;
 		}
 
-		// Execute the action.
-		return $this->execute($payload->getData()['user_id']);
-	}
-
-	/**
-	 *	Execute
-	 */
-	public function execute($data)
-	{
-		return User::get([['field' => 'id', 'value' => $data, 'operator' => '=', 'or' => false]]);
+		return User::get([['field' => 'id', 'value' => $payload->getData()['user_id'], 'operator' => '=', 'or' => false]]);
 	}
 }

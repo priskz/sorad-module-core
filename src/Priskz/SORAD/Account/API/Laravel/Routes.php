@@ -10,7 +10,7 @@ class Routes extends AbstractRoutes
     /**
      * @property string $prefix
      */
-	protected static $prefix     = 'account';
+	protected static $prefix = 'account';
 
     /**
      * @property array $middleware
@@ -20,7 +20,7 @@ class Routes extends AbstractRoutes
     /**
      * @property array $nameSpace
      */
-	protected static $namespace  = __NAMESPACE__;
+	protected static $namespace = __NAMESPACE__;
 
     /**
      * Register the route group.
@@ -32,13 +32,13 @@ class Routes extends AbstractRoutes
 		Route::group(['prefix' => static::$prefix, 'middleware' => static::$middleware, 'namespace' => static::$namespace], function()
 		{
 			// Show User account overview.
-			Route::get('/', 'ShowOverview')->name('account.overview');
+			Route::get('/', 'ShowOverview\Responder')->name('account.overview');
 
 			// Show edit User account form.
-			Route::get('edit', 'ShowEdit')->name('account.edit');
+			Route::get('edit', 'ShowEdit\Responder')->name('account.edit');
 
 			// Update a User account.
-			Route::put('edit', 'Update')->name('account.update');
+			Route::put('edit', 'Update\Responder')->name('account.update');
 		});
 	}
 }
