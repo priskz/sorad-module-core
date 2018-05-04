@@ -3,10 +3,10 @@
 namespace Priskz\SORAD\Auth\API\Laravel\Register;
 
 use Auth;
-use Priskz\SORAD\Action\Laravel\AbstractAction;
+use Priskz\SORAD\Action\LaravelAction;
 use AuthRoot;
 
-class Action extends AbstractAction
+class Action extends LaravelAction
 {
 	/**
 	 * @var  array  Data configuration.

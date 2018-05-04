@@ -3,9 +3,9 @@
 namespace Priskz\SORAD\Account\API\Laravel\ShowOverview;
 
 use User;
-use Priskz\SORAD\Action\Laravel\AbstractAction;
+use Priskz\SORAD\Action\LaravelAction;
 
-class Action extends AbstractAction
+class Action extends LaravelAction
 {
 	/**
 	 * @var  array  Data configuration.

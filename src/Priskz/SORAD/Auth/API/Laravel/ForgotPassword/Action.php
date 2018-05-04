@@ -6,9 +6,9 @@ use Auth;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Priskz\Payload\Payload;
-use Priskz\SORAD\Action\Laravel\AbstractAction;
+use Priskz\SORAD\Action\LaravelAction;
 
-class Action extends AbstractAction
+class Action extends LaravelAction
 {
 	// Laravel Trait
 	use ResetsPasswords;

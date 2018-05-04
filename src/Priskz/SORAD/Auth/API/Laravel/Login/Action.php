@@ -4,9 +4,9 @@ namespace Priskz\SORAD\Auth\API\Laravel\Login;
 
 use Auth;
 use Priskz\Payload\Payload;
-use Priskz\SORAD\Action\Laravel\AbstractAction;
+use Priskz\SORAD\Action\LaravelAction;
 
-class Action extends AbstractAction
+class Action extends LaravelAction
 {
 	/**
 	 * @var  array  Data configuration.

@@ -4,9 +4,9 @@ namespace Priskz\SORAD\Account\API\Laravel\Update;
 
 use User;
 use Priskz\SORAD\Account\API\Laravel\Update\Processor;
-use Priskz\SORAD\Action\Laravel\AbstractAction;
+use Priskz\SORAD\Action\LaravelAction;
 
-class Action extends AbstractAction
+class Action extends LaravelAction
 {
 	/**
 	 * @var  array  Data configuration.
