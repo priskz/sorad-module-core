@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel\ShowOverview;
+<?php
+
+namespace Priskz\SORAD\Account\API\Laravel\ShowOverview;
 
 use User;
 use Priskz\SORAD\Action\Laravel\AbstractAction;
@@ -6,16 +8,9 @@ use Priskz\SORAD\Action\Laravel\AbstractAction;
 class Action extends AbstractAction
 {
 	/**
-	 * @var  array 	Data accepted by this action.
+	 * @var  array  Data configuration.
 	 */
-	protected $dataKeys = [
-		'user_id'
-	];
-
-	/**
-	 * @var  array 	Rules for any data.
-	 */
-	protected $rules = [
+	protected $config = [
 		'user_id' => 'required'
 	];
 
@@ -25,16 +20,16 @@ class Action extends AbstractAction
 	public function __invoke($requestData)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
+		$payload = $this->processor->process($requestData, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($actionDataPayload->getStatus() != 'valid')
+		if($payload->getStatus() != 'valid')
 		{
-			return $actionDataPayload;
+			return $payload;
 		}
 
 		// Execute the action.
-		return $this->execute($actionDataPayload->getData()['user_id']);
+		return $this->execute($payload->getData()['user_id']);
 	}
 
 	/**

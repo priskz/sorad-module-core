@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Auth\API\Laravel\ResetPassword;
+<?php
+
+namespace Priskz\SORAD\Auth\API\Laravel\ResetPassword;
 
 use Auth, Hash, Password;
 use Priskz\Payload\Payload;
@@ -7,16 +9,9 @@ use Priskz\SORAD\Action\Laravel\AbstractAction;
 class Action extends AbstractAction
 {
 	/**
-	 * @var  array 	Data accepted by this action.
+	 * @var  array  Data configuration.
 	 */
-	protected $dataKeys = [
-		'email', 'password', 'password_confirmation', 'token'
-	];
-
-	/**
-	 * @var  array 	Rules for any data.
-	 */
-	protected $rules = [
+	protected $config = [
 		'email'					=> 'required',
 		'password'   			=> 'required|confirmed',
 		'password_confirmation' => 'required',
@@ -34,35 +29,26 @@ class Action extends AbstractAction
 	/**
 	 *	Main Method
 	 */
-	public function __invoke($requestData)
+	public function execute($data)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
+		$payload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($actionDataPayload->getStatus() != 'valid')
+		if($payload->getStatus() != 'valid')
 		{
-			return $actionDataPayload;
+			return $payload;
 		}
 
 		// Set the execute data.
-		$executeData = $actionDataPayload->getData();
+		$executeData = $payload->getData();
 
-		// Execute the action.
-		return $this->execute($executeData);
-	}
-
-	/**
-	 *	Execute
-	 */
-	public function execute($data)
-	{
 		$status = Password::reset($data, function($user, $password)
 		{
 			$user->password = Hash::make($password);
 			$user->save();
 		});
 
-	    return $payload = new Payload($data, $status);
+	    return new Payload($data, $status);
 	}
 }

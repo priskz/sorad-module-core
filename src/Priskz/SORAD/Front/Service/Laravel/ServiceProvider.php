@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Front\Service\Laravel;
+<?php
+
+namespace Priskz\SORAD\Front\Service\Laravel;
 
 use Priskz\SORAD\Front\API\Laravel\Routes;
 use Priskz\SORAD\ServiceProvider\Laravel\AbstractRootServiceProvider as RootServiceProvider;

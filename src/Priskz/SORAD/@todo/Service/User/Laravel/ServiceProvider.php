@@ -1,4 +1,6 @@
-<?php namespace Service\User\Laravel;
+<?php
+
+namespace Service\User\Laravel;
 
 use Priskz\SORAD\ServiceProvider\Laravel\AbstractServiceProvider as SORADServiceProvider;
 use Domain\User\Data\MySQL\Eloquent\Model as Model;

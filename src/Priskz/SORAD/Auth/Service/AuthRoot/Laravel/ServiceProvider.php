@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Auth\Service\AuthRoot\Laravel;
+<?php
+
+namespace Priskz\SORAD\Auth\Service\AuthRoot\Laravel;
 
 use Priskz\SORAD\Auth\API\Laravel\Routes;
 use Priskz\SORAD\Auth\Service\AuthRoot\Processor\Standard as Processor;

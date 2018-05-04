@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Auth\API\Laravel\ForgotPassword;
+<?php
+
+namespace Priskz\SORAD\Auth\API\Laravel\ForgotPassword;
 
 use Auth;
 use Illuminate\Contracts\Auth\PasswordBroker;
@@ -12,17 +14,10 @@ class Action extends AbstractAction
 	use ResetsPasswords;
 
 	/**
-	 * @var  array 	Data accepted by this action.
+	 * @var  array  Data configuration.
 	 */
-	protected $dataKeys = [
-		'email',
-	];
-
-	/**
-	 * @var  array 	Rules for any data.
-	 */
-	protected $rules = [
-		'email'    => 'required',
+	protected $config = [
+		'email' => 'required',
 	];
 
 	/**
@@ -37,10 +32,10 @@ class Action extends AbstractAction
 	/**
 	 *	Main Method
 	 */
-	public function __invoke($requestData)
+	public function execute($data)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
+		$actionDataPayload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
 		if($actionDataPayload->getStatus() != 'valid')
@@ -51,15 +46,6 @@ class Action extends AbstractAction
 		// Set the execute data.
 		$executeData = $actionDataPayload->getData();
 
-		// Execute the action.
-		return $this->execute($executeData);
-	}
-
-	/**
-	 *	Execute
-	 */
-	public function execute($data)
-	{
 		$response = $this->passwords->sendResetLink($data, function($email)
 		{
 			$email->subject('Password Reset');

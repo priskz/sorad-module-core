@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel\Update;
+<?php
+
+namespace Priskz\SORAD\Account\API\Laravel\Update;
 
 use Hash;
 use Priskz\Payload\Payload;
@@ -14,10 +16,10 @@ class Processor extends LaravelProcessor
 	 * @param  array  $rules
 	 * @return Payload
 	 */
-	public function process(array $data, array $dataKeys, array $rules)
+	public function process(array $data, array $config)
 	{
 		// Intersect the data given the with the data keys provided.
-		$specifiedData = array_intersect_key($data, array_flip($dataKeys));
+		$specifiedData = array_intersect_key($data, array_flip(array_keys($config)));
 
 		// Unset password if null, otherwise hash it for saving.
 		if(array_key_exists('password', $specifiedData))
@@ -30,10 +32,10 @@ class Processor extends LaravelProcessor
 		}
 
 		// Validate and set our errors if they exist.
-		$this->errorPayload = $this->validator->validate($specifiedData, $rules);
+		$this->errorPayload = $this->validator->validate($specifiedData, $config);
 
 		// Return sanitized data if no validation errors exist.
-		if($this->errorPayload->getStatus() == 'valid')
+		if($this->errorPayload->getStatus() == Payload::STATUS_VALID)
 		{
 			// Hash password if present.
 			if(array_key_exists('password', $specifiedData))
@@ -41,7 +43,7 @@ class Processor extends LaravelProcessor
 				$specifiedData['password'] = Hash::make($specifiedData['password']);
 			}
 
-			return new Payload($specifiedData, 'valid');
+			return new Payload($specifiedData, Payload::STATUS_VALID);
 		}
 
 		return $this->errorPayload;

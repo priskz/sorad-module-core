@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Auth\Service\AuthRoot\Processor;
+<?php
+
+namespace Priskz\SORAD\Auth\Service\AuthRoot\Processor;
 
 use Hash;
 use Priskz\Payload\Payload;

@@ -1,4 +1,6 @@
-<?php namespace Service\User;
+<?php
+
+namespace Service\User;
 
 use Priskz\SORAD\Service\Laravel\GenericCrudService;
 

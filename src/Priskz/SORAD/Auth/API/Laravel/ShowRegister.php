@@ -1,15 +1,22 @@
-<?php namespace Priskz\SORAD\Auth\API\Laravel;
+<?php
+
+namespace Priskz\SORAD\Auth\API\Laravel;
 
 use Config, View;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class ShowRegister extends Responder
 {
 	/**
-	 *	Generate Response
+	 *	@var  string
 	 */
-	public function generateResponse($data)
+	protected $type = self::HEADER_HTML;
+
+	/**
+	 *	Set the body of the response.
+	 */
+	public function setBody()
 	{
-		return View::make(Config::get('sorad.auth.view.prefix') . 'auth.register');
+		$this->body = View::make(Config::get('sorad.auth.view.prefix') . 'auth.register');
 	}
 }

@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Auth\Service\AuthRoot;
+<?php
+
+namespace Priskz\SORAD\Auth\Service\AuthRoot;
 
 use Priskz\SORAD\Service\Laravel\GenericCrudService;
 

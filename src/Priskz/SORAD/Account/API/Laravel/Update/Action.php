@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel\Update;
+<?php
+
+namespace Priskz\SORAD\Account\API\Laravel\Update;
 
 use User;
 use Priskz\SORAD\Account\API\Laravel\Update\Processor;
@@ -7,16 +9,9 @@ use Priskz\SORAD\Action\Laravel\AbstractAction;
 class Action extends AbstractAction
 {
 	/**
-	 * @var  array 	Data accepted by this action.
+	 * @var  array  Data configuration.
 	 */
-	protected $dataKeys = [
-		'user_id', 'username', 'password', 'password_confirmation', 'email', 'first_name', 'last_name'
-	];
-
-	/**
-	 * @var  array 	Rules for any data.
-	 */
-	protected $rules = [
+	protected $config = [
 		'user_id'               => 'required',
 		'username'   			=> 'required',
 		'password'   			=> 'confirmed|min:6',
@@ -37,10 +32,10 @@ class Action extends AbstractAction
 	/**
 	 *	Main Method
 	 */
-	public function __invoke($requestData)
+	public function execute($data)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
+		$actionDataPayload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
 		if($actionDataPayload->getStatus() != 'valid')
@@ -64,14 +59,6 @@ class Action extends AbstractAction
 		$executeData['input'] = $actionDataPayload->getData();
 
 		// Execute the action.
-		return $this->execute($executeData);
-	}
-
-	/**
-	 *	Execute
-	 */
-	public function execute($data)
-	{
-		return User::update($data['input'], $data['model']);
+		return User::update($executeData['input'], $executeData['model']);
 	}
 }

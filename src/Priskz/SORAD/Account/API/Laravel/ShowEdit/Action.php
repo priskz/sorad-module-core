@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel\ShowEdit;
+<?php
+
+namespace Priskz\SORAD\Account\API\Laravel\ShowEdit;
 
 use User;
 use Priskz\SORAD\Action\Laravel\AbstractAction;
@@ -6,45 +8,30 @@ use Priskz\SORAD\Action\Laravel\AbstractAction;
 class Action extends AbstractAction
 {
 	/**
-	 * @var  array 	Data accepted by this action.
+	 * @var  array  Data configuration.
 	 */
-	protected $dataKeys = [
-		'user_id',
-	];
-
-	/**
-	 * @var  array 	Rules for any data.
-	 */
-	protected $rules = [
+	protected $config = [
 		'user_id' => 'required',
 	];
 
 	/**
 	 *	Main Method
 	 */
-	public function __invoke($requestData)
+	public function execute($data)
 	{
 		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
+		$payload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($actionDataPayload->getStatus() != 'valid')
+		if($payload->getStatus() != 'valid')
 		{
-			return $actionDataPayload;
+			return $payload;
 		}
 
 		// Set the execute data.
-		$executeData = $actionDataPayload->getData()['user_id'];
+		$executeData = $payload->getData()['user_id'];
 
 		// Execute the action.
-		return $this->execute($executeData);
-	}
-
-	/**
-	 *	Execute
-	 */
-	public function execute($data)
-	{
 		return User::get([['field' => 'id', 'value' => $data, 'operator' => '=', 'or' => false]]);
 	}
 }

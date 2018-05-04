@@ -1,8 +1,10 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel;
+<?php
 
-use Auth, Input, Redirect, Route, View;
+namespace Priskz\SORAD\Account\API\Laravel;
+
+use Auth, Input, Route;
 use Priskz\SORAD\Account\API\Laravel\Update\Action;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class Update extends Responder
 {
@@ -15,30 +17,9 @@ class Update extends Responder
 	}
 
 	/**
-	 *	Generate Response
-	 */
-	public function generateResponse($payload)
-	{
-		if($payload->getStatus() != 'updated')
-		{
-			// Retrieve error messages for display.
-			foreach($payload->getData()->all() as $message)
-			{
-				dd($message);
-			}
-
-			return Redirect::back();
-		}
-
-		dd('Account successfully updated!');
-
-		return Redirect::back();
-	}
-	
-	/**
 	 *	Get Request Data
 	 */
-	public function getRequestData()
+	public function parseRequest()
 	{
 		$requestData = Input::all();
 

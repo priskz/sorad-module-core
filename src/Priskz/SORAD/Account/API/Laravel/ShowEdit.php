@@ -1,8 +1,10 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel;
+<?php
 
-use Auth, Config, Input, Redirect, Route, View;
+namespace Priskz\SORAD\Account\API\Laravel;
+
+use Auth, Input, Route;
 use Priskz\SORAD\Account\API\Laravel\ShowEdit\Action;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class ShowEdit extends Responder
 {
@@ -15,29 +17,9 @@ class ShowEdit extends Responder
 	}
 
 	/**
-	 *	Generate Response
-	 */
-	public function generateResponse($payload)
-	{
-		if($payload->getStatus() != 'found')
-		{
-			// Retrieve error messages for display.
-			foreach($payload->getData()->all() as $message)
-			{
-				dd($message);
-			}
-
-			return Redirect::back();
-		}
-
-		return View::make(Config::get('sorad.account.view.prefix') . 'account.edit')
-			->with('user', $payload->getData()->first());
-	}
-
-	/**
 	 *	Get Request Data
 	 */
-	public function getRequestData()
+	public function parseRequest()
 	{
 		$requestData = Input::all();
 

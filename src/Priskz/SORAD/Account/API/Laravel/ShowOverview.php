@@ -1,8 +1,10 @@
-<?php namespace Priskz\SORAD\Account\API\Laravel;
+<?php
 
-use Auth, Config, Input, Redirect, Route, View;
+namespace Priskz\SORAD\Account\API\Laravel;
+
+use Auth, Input, Route;
 use Priskz\SORAD\Account\API\Laravel\ShowOverview\Action;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class ShowOverview extends Responder
 {
@@ -15,23 +17,9 @@ class ShowOverview extends Responder
 	}
 
 	/**
-	 *	Generate Response
-	 */
-	public function generateResponse($payload)
-	{
-		if($payload->getStatus() != 'found')
-		{
-			return Redirect::route(Config::get('sorad.account.view.prefix') . 'front.home');
-		}
-
-		return View::make(Config::get('sorad.account.view.prefix') . 'account.overview')
-			->with('user', $payload->getData()->first());
-	}
-
-	/**
 	 *	Get Request Data
 	 */
-	public function getRequestData()
+	public function parseRequest()
 	{
 		$requestData = Input::all();
 

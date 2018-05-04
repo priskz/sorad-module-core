@@ -22,6 +22,6 @@
 <script src="{{ asset('dist/misc/ajaxer.js') }}"></script>
 
 <script>
-	// @todo: Display notifications.
+	// @todo: Display notifications
 </script>
 @stop

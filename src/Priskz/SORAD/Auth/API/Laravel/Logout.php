@@ -1,31 +1,25 @@
-<?php namespace Priskz\SORAD\Auth\API\Laravel;
+<?php
 
-use Redirect;
+namespace Priskz\SORAD\Auth\API\Laravel;
+
 use Priskz\SORAD\Auth\API\Laravel\Logout\Action;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class Logout extends Responder
 {
+	/**
+	 *	@var  array
+	 */
+	protected $status = [
+		'logged_out'    => self::HTTP_OK,
+		'logout_failed' => self::HTTP_BAD_REQUEST
+	];
+
 	/**
 	 *	Constructor
 	 */
 	public function __construct(Action $action)
 	{
 		$this->action = $action;
-	}
-
-	/**
-	 *	Generate Response
-	 */
-	public function generateResponse($payload)
-	{
-		if($payload->getStatus() != 'logged_out')
-		{
-			dd('Logout failed. Please try again.');
-
-			return Redirect::back();
-		}
-
-		return Redirect::route('front.home');
 	}
 }

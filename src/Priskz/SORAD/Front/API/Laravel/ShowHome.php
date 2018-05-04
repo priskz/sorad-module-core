@@ -1,24 +1,22 @@
-<?php namespace Priskz\SORAD\Front\API\Laravel;
+<?php
+
+namespace Priskz\SORAD\Front\API\Laravel;
 
 use Config, View;
-use Priskz\SORAD\Front\API\Laravel\ShowHome\Action;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class ShowHome extends Responder
 {
 	/**
-	 *	Constructor
+	 *	@var  string
 	 */
-	public function __construct(Action $action)
-	{
-		$this->action = $action;
-	}
+	protected $type = self::HEADER_HTML;
 
 	/**
-	 *	Generate Response
+	 *	Set the body of the response.
 	 */
-	public function generateResponse($payload)
+	public function setBody()
 	{
-		return View::make(Config::get('sorad.front.view.prefix') . 'front.home');
+		$this->body = View::make(Config::get('sorad.front.view.prefix') . 'front.home');
 	}
 }

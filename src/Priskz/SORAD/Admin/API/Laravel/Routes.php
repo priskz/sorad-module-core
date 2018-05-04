@@ -1,4 +1,6 @@
-<?php namespace Priskz\SORAD\Admin\API\Laravel;
+<?php
+
+namespace Priskz\SORAD\Admin\API\Laravel;
 
 use Illuminate\Support\Facades\Route;
 use Priskz\SORAD\Routes\Laravel\AbstractRoutes;

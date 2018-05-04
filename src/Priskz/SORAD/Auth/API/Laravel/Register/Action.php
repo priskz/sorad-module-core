@@ -1,21 +1,17 @@
-<?php namespace Priskz\SORAD\Auth\API\Laravel\Register;
+<?php
 
+namespace Priskz\SORAD\Auth\API\Laravel\Register;
+
+use Auth;
 use Priskz\SORAD\Action\Laravel\AbstractAction;
 use AuthRoot;
 
 class Action extends AbstractAction
 {
 	/**
-	 * @var  array 	Data accepted by this action.
+	 * @var  array  Data configuration.
 	 */
-	protected $dataKeys = [
-		'username', 'password', 'password_confirmation', 'email', 'first_name', 'last_name'
-	];
-
-	/**
-	 * @var  array 	Rules for any data.
-	 */
-	protected $rules = [
+	protected $config = [
 		'username'   			=> 'required',
 		'password'   			=> 'required|confirmed',
 		'password_confirmation' => 'required',
@@ -27,26 +23,27 @@ class Action extends AbstractAction
 	/**
 	 *	Main Method
 	 */
-	public function __invoke($requestData)
-	{
-		// Process Domain Data Keys
-		$actionDataPayload = $this->processor->process($requestData, $this->getDataKeys(), $this->getRules());
-
-		// Verify that the data has been sanitized and validated.
-		if($actionDataPayload->getStatus() != 'valid')
-		{
-			return $actionDataPayload;
-		}
-
-		// Execute the action.
-		return $this->execute($actionDataPayload->getData());
-	}
-
-	/**
-	 *	Execute
-	 */
 	public function execute($data)
 	{
-		return AuthRoot::register($data);
+		// Process Domain Data Keys
+		$payload = $this->processor->process($data, $this->config);
+
+		// Verify that the data has been sanitized and validated.
+		if($payload->getStatus() != 'valid')
+		{
+			return $payload;
+		}
+
+		$registerPayload = AuthRoot::register($data);
+
+		if($registerPayload->getStatus() != 'created')
+		{
+			return $registerPayload;
+		}
+
+		// Log the newly register user in before sending them off.
+		Auth::loginUsingId($payload->getData()->getKey());
+
+		return $registerPayload;
 	}
 }

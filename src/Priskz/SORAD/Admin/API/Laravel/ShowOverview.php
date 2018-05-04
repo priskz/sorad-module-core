@@ -1,15 +1,22 @@
-<?php namespace Priskz\SORAD\Admin\API\Laravel;
+<?php
+
+namespace Priskz\SORAD\Admin\API\Laravel;
 
 use Config, View;
-use Priskz\SORAD\Responder\Laravel\AbstractGenericResponder as Responder;
+use Priskz\SORAD\Responder\LaravelResponder as Responder;
 
 class ShowOverview extends Responder
 {
 	/**
-	 *	Generate Response
+	 *	@var  string
 	 */
-	public function generateResponse($payload)
+	protected $type = self::HEADER_HTML;
+
+	/**
+	 *	Set the body of the response.
+	 */
+	public function setBody()
 	{
-		return View::make(Config::get('sorad.admin.view.prefix') . 'admin.overview');
+		$this->body = View::make(Config::get('sorad.admin.view.prefix') . 'admin.overview');
 	}
 }
