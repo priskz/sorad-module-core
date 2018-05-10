@@ -3,6 +3,7 @@
 namespace Priskz\SORAD\Auth\API\Laravel\Register;
 
 use Auth;
+use Priskz\Payload\Payload;
 use Priskz\SORAD\Action\LaravelAction;
 use AuthRoot;
 
@@ -29,7 +30,7 @@ class Action extends LaravelAction
 		$payload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($payload->getStatus() != 'valid')
+		if( ! $payload->isStatus(Payload::STATUS_VALID))
 		{
 			return $payload;
 		}

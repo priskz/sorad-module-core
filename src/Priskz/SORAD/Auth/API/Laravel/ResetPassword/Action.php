@@ -35,7 +35,7 @@ class Action extends LaravelAction
 		$payload = $this->processor->process($data, $this->config);
 
 		// Verify that the data has been sanitized and validated.
-		if($payload->getStatus() != 'valid')
+		if( ! $payload->isStatus(Payload::STATUS_VALID))
 		{
 			return $payload;
 		}
