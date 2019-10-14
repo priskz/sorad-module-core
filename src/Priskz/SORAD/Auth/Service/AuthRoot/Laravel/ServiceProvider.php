@@ -13,7 +13,7 @@ class ServiceProvider extends RootServiceProvider
      * @property string $providerKey
      */
 	protected static $providerKey = 'auth-root';
-	
+
     /**
      * @property array $aggregates
      */

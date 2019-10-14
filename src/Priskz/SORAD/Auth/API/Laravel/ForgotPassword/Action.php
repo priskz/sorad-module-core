@@ -42,7 +42,7 @@ class Action extends LaravelAction
 		{
 			return $payload;
 		}
-		
+
 		$response = $this->passwords->sendResetLink($payload->getData(), function($email)
 		{
 			$email->subject('Password Reset');

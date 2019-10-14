@@ -15,7 +15,7 @@ class Standard extends LaravelProcessor
 
 	/**
 	 * Construct
-	 * 
+	 *
 	 * @param  array  $service
 	 */
 	public function __construct($service)
@@ -28,14 +28,14 @@ class Standard extends LaravelProcessor
 
 	/**
 	 * @OVERRIDE
-	 * 
+	 *
 	 * Process the given data against the given rules and useable data keys.
 	 *
 	 * @param  array  $data
 	 * @param  array  $keys
 	 * @param  array  $rules
 	 * @param  array  $defaults
-	 * 
+	 *
 	 * @return Payload\Payload
 	 */
 	public function process($data, $keys, $rules, $defaults = null)
@@ -106,7 +106,7 @@ class Standard extends LaravelProcessor
 
 					case 'unique_username':
 						$userPayload = $this->service['user']->get([['field' => 'username', 'value' => $data['username'], 'operator' => '=', 'or' => false]]);
-						
+
 						if($userPayload->getStatus() == 'found')
 						{
 							if(in_array($data['username'], $userPayload->getData()->pluck('username')->toArray()))

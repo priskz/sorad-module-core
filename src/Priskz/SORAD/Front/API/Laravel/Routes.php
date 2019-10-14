@@ -24,7 +24,7 @@ class Routes extends AbstractRoutes
 
     /**
      * Register the route group.
-     * 
+     *
      * @return void
      */
 	protected static function register()

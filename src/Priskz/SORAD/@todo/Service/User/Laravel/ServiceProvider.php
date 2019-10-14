@@ -20,7 +20,7 @@ class ServiceProvider extends SORADServiceProvider
 	 * Register Services.
 	 *
 	 * @return void
-	 */  
+	 */
 	protected function registerService()
 	{
 		$this->app->singleton($this->getProviderKey(), function($app)

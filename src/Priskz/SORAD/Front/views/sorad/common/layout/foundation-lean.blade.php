@@ -19,9 +19,9 @@
 		@yield('head-styles')
 
 		@yield('head-scripts')
-		
+
 	</head>
 
 	@yield('body')
-	
+
 </html>

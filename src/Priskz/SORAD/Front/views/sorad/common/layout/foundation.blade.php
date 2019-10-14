@@ -19,7 +19,7 @@
 		@yield('view-styles', '<!-- View Styles -->')
 
 		@yield('head-scripts', '<!-- Head Scripts -->')
-		
+
 	</head>
 
 	@yield('body', '<!-- Body -->')

@@ -37,7 +37,7 @@ class Service extends GenericCrudService
 	public function __construct($alias, $processor, $aggregate)
 	{
 		parent::__construct($alias, $processor);
-		$this->dataSource = $aggregate['user'];		
+		$this->dataSource = $aggregate['user'];
 	}
 
 	/**
