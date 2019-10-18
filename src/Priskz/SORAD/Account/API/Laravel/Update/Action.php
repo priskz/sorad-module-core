@@ -46,7 +46,7 @@ class Action extends LaravelAction
 		// @todo: Refactor this logic out of this class.
 
 		// Get and ensure the model exists.
-		$userPayload = User::get([['field' => 'id', 'value' => $payload->getData('user_id'), 'operator' => '=', 'or' => false]]);
+		$userPayload = User::get([['field' => 'id', 'value' => $payload->get('user_id'), 'operator' => '=', 'or' => false]]);
 
 		if($userPayload->getStatus() != 'found')
 		{

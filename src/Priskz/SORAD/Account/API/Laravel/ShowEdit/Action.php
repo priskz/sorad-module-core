@@ -30,6 +30,6 @@ class Action extends LaravelAction
 		}
 
 		// Execute the action.
-		return User::get([['field' => 'id', 'value' => $payload->getData('user_id'), 'operator' => '=', 'or' => false]]);
+		return User::get([['field' => 'id', 'value' => $payload->get('user_id'), 'operator' => '=', 'or' => false]]);
 	}
 }
