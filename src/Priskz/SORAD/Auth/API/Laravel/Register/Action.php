@@ -43,7 +43,7 @@ class Action extends LaravelAction
 		}
 
 		// Log the newly register user in before sending them off.
-		Auth::loginUsingId($payload->getData()->getKey());
+		Auth::loginUsingId($payload->get('id'));
 
 		return $registerPayload;
 	}
