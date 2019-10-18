@@ -65,9 +65,9 @@ class Standard extends LaravelProcessor
 		}
 
 		// Hash the password before saving if it is not empty, otherwise unset it as it is not needed.
-		if( ! empty($validatorPayload->getData()['password']))
+		if( ! empty($validatorPayload->getData('password')))
 		{
-			$processData['password'] = Hash::make($validatorPayload->getData()['password']);
+			$processData['password'] = Hash::make($validatorPayload->getData('password'));
 		}
 		else
 		{
